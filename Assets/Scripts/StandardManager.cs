@@ -7,7 +7,10 @@ public class StandardManager : MonoBehaviour {
     private TimeManager timeManager = new TimeManager();
 
     [SerializeField]
-    float playTime = 3.0f;
+    UnityEngine.UI.Text label;
+
+    [SerializeField]
+    float playTime = 2.5f;
 
     float sign = 1.0f;
 
@@ -34,7 +37,19 @@ public class StandardManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timeManager.Time += sign * Time.deltaTime;
-        if (timeManager.Time > playTime) sign = -1.0f;
-        if (timeManager.Time < 0) sign = 1.0f;
+        if (timeManager.Time > playTime)
+        {
+            sign = -1.0f;
+
+            label.text = "Reverse Time";
+            label.color = Color.red;
+        }
+        if (timeManager.Time < 0)
+        {
+            sign = 1.0f;
+
+            label.text = "Forward Time";
+            label.color = Color.green;
+        }
     }
 }
