@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public delegate void ReversingTimeAction();
+public delegate void ReversingTimeActionDelegate();
 
-class ActionWithTime
+class ReversingActionWithTime
 {
-    public ActionWithTime(float time, ReversingTimeAction action)
+    public ReversingActionWithTime(float time, ReversingTimeActionDelegate action)
     {
         this.time = time;
         this.actionToCarry = action;
     }
     public float time;
-    public ReversingTimeAction actionToCarry;
+    public ReversingTimeActionDelegate actionToCarry;
 }
 
 public class TimeManager
@@ -74,12 +74,12 @@ public class TimeManager
     
     public IEnumerable<ITimeChanging> TimeDependants { get; set; }
 
-    public void RememberAction(ReversingTimeAction action)
+    public void RememberAction(ReversingTimeActionDelegate action)
     {
-        actions.Push(new ActionWithTime(Time, action));
+        actions.Push(new ReversingActionWithTime(Time, action));
     }
 
-    Stack<ActionWithTime> actions = new Stack<ActionWithTime>();
+    Stack<ReversingActionWithTime> actions = new Stack<ReversingActionWithTime>();
 
 }
 
